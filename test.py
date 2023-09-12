@@ -27,7 +27,20 @@ student_list = student_list.find_elements(By.TAG_NAME,"tr")
 
 dict = ["序号","学号","姓名","状态","作答时间","迟交状态","批阅状态","批阅时间","分数","操作"]
 for student in student_list:
+    student_state_ele ={}
+    student_state = {}
+    student = student.find_elements(By.TAG_NAME,"td")
+    
+    for i in range(len(student)-1):
+        student_state_ele[dict[i]] = student[i]
+    
+    for key in student_state_ele:
+        student_state[key] = student_state_ele[key].find_element(By.TAG_NAME,"span").text
 
+    print(student_state)
+
+   
+    # print(student.text)
 
 
 
