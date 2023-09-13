@@ -24,7 +24,7 @@ browser.switch_to.window(handles[-1])
 header_element = browser.find_element(By.CLASS_NAME,"header-nav-list")
 a_element_list = header_element.find_elements(By.TAG_NAME,"a")
 a_element_list[2].click()
-
+browser.implicitly_wait(10)
 
 # 点击作业
 course = browser.find_element(By.CLASS_NAME,"rdjx-wgl-btn")
@@ -81,14 +81,21 @@ for student in student_list:
                 score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
                 score_input_ele.send_keys('sdffsdfsdff')
                 
-                # 上传文件
+                # 上传文件                
+                upload_button_ele = browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[2]/form/div/div[4]/div/div/button")
+                upload_button_ele.click()                 
 
+                input_ele = browser.find_element(By.CLASS_NAME,"uploader-btn").find_element(By.TAG_NAME,"input")
+                input_ele.send_keys(r"D:\Document\Study\研二上_电路助教\buaa_spoc_automation\data\第一次作业\作业情况.xlsx")
+                time.sleep(5)
+                browser.find_element(By.XPATH,"/html/body/div[2]/div[2]/div/div/div[3]/div/button").click()
                 # 上传评语
                 # 切换窗口
                 browser.switch_to.frame("tiny-vue_25609986231694613339633_ifr")
                 body_ele = browser.find_element(By.ID,"tinymce")
                 text_ele = body_ele.find_element(By.TAG_NAME,'p')
                 text_ele.send_keys("sadfafd")
+                browser.switch_to.default_content()
 
                 # 点击确认
                 pass
