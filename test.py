@@ -10,9 +10,12 @@ browser.switch_to.frame("loginIframe")
 browser.find_element(By.ID,"unPassword").send_keys("zy2203203")
 browser.find_element(By.ID,"pwPassword").send_keys("BJydcs001")
 browser.find_element(By.CLASS_NAME,"submit-btn").click()
+time.sleep(2)
 # 点击我是助教
-list = browser.find_element(By.TAG_NAME,"a").click()
-list[3].click()
+header_element = browser.find_element(By.CLASS_NAME,"header-nav-list")
+a_element_list = header_element.find_elements(By.TAG_NAME,"a")
+a_element_list[2].click()
+
 
 # 点击课程
 course = browser.find_element(By.CLASS_NAME,"rdjx-wgl-btn")
@@ -31,11 +34,14 @@ for student in student_list:
     student_state = {}
     student = student.find_elements(By.TAG_NAME,"td")
     
-    for i in range(len(student)-1):
+    for i in range(len(student)):
         student_state_ele[dict[i]] = student[i]
     
     for key in student_state_ele:
-        student_state[key] = student_state_ele[key].find_element(By.TAG_NAME,"span").text
+        if key != "操作":
+           student_state[key] = student_state_ele[key].find_element(By.TAG_NAME,"span").text
+    review_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[0]
+    reject_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[1]
 
     print(student_state)
 
