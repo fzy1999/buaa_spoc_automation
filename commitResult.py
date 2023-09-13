@@ -91,11 +91,13 @@ for student in student_list:
                 browser.find_element(By.XPATH,"/html/body/div[2]/div[2]/div/div/div[3]/div/button").click()
                 # 上传评语
                 # 切换窗口
-                browser.switch_to.frame("tiny-vue_25609986231694613339633_ifr")
-                body_ele = browser.find_element(By.ID,"tinymce")
-                text_ele = body_ele.find_element(By.TAG_NAME,'p')
-                text_ele.send_keys("sadfafd")
-                browser.switch_to.default_content()
+                # iframe = browser.find_element(By.TAG_NAME,"iframe")
+                # browser.switch_to.frame(iframe)
+                # body_ele = browser.find_element(By.ID,"tinymce")
+                # text_ele = body_ele.find_element(By.TAG_NAME,'p')
+                # text_ele.send_keys("sadfafd")
+                # browser.switch_to.default_content()
+
 
                 # 点击确认
                 pass
