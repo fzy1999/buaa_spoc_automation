@@ -78,14 +78,17 @@ for student in student_list:
                 
                 # 分数
                 score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
-                score_input_ele.send_keys('sdfff')
+                score_input_ele.send_keys('sdffsdfsdff')
                 
                 # 上传文件
 
                 # 上传评语
                 # 切换窗口
                 browser.switch_to.frame("tiny-vue_25609986231694613339633_ifr")
-                
+                body_ele = browser.find_element(By.ID,"tinymce")
+                text_ele = body_ele.find_element(By.TAG_NAME,'p')
+                text_ele.send_keys("sadfafd")
+
                 # 点击确认
                 pass
         elif student_result["评级"]=="B":
