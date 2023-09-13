@@ -12,10 +12,10 @@ def get_subfolders(folder_path):
     return [os.path.join(folder_path, subfolder) for subfolder in subfolders]
 
 
-ORIGIN_PATH = "D:\\Document\\Study\\研二上_电路助教\\buaa_spoc_automation\\data\\第一次作业"
+HOMEWORK_PATH = "D:\\Document\\Study\\研二上_电路助教\\buaa_spoc_automation\\data\\第一次作业"
 serial = "1"
 
-subfolders = get_subfolders(os.path.join(ORIGIN_PATH,'学生作业附件'))
+subfolders = get_subfolders(os.path.join(HOMEWORK_PATH,'学生作业附件'))
 for subfolder in subfolders:
     ID_str = subfolder.split("\\")[-1].split('-')[0]
     name = subfolder.split("\\")[-1].split('-')[1]
@@ -28,10 +28,10 @@ for subfolder in subfolders:
 
     new_file_name = serial+'-'+ID_str + '-' + name  + '.' + file_type
 
-    destination_file = os.path.join(ORIGIN_PATH,'批改前',new_file_name)
+    destination_file = os.path.join(HOMEWORK_PATH,'批改前',new_file_name)
     shutil.copy2(source_file,destination_file)
 
-    destination_file = os.path.join(ORIGIN_PATH,'批改后',new_file_name)
+    destination_file = os.path.join(HOMEWORK_PATH,'批改后',new_file_name)
     shutil.copy2(source_file,destination_file)
     # shutil.move(source_file,destination_file)
 
