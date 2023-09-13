@@ -35,7 +35,8 @@ browser.implicitly_wait(10)
 handles = browser.window_handles
 browser.switch_to.window(handles[-1])
 
-browser.find_element(By.XPATH,"/html/body/div[5]/div/div/div/div[2]/form/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div/div[1]/i").click()
+browser.implicitly_wait(10)
+browser.find_element(By.XPATH,"/html/body/div[5]/div/div/div/div[2]/form/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div").click()
 
 student_list = browser.find_element(By.XPATH,"/html/body/div[5]/div/div/div/div[2]/form/div/div/div[2]/div/div/div/div[1]/div[2]/div[3]/div/div[2]/div/div/div/div[2]/div/div[1]/div[2]/table/tbody")
 student_list = student_list.find_elements(By.TAG_NAME,"tr")
@@ -52,8 +53,8 @@ for student in student_list:
     for key in student_state_ele:
         if key != "操作":
            student_state[key] = student_state_ele[key].find_element(By.TAG_NAME,"span").text
-    review_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[0]
-    reject_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[1]
+    # review_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[0]
+    # reject_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[1]
 
     print(student_state)
 

@@ -30,6 +30,9 @@ for subfolder in subfolders:
 
     destination_file = os.path.join(ORIGIN_PATH,'批改前',new_file_name)
     shutil.copy2(source_file,destination_file)
+
+    destination_file = os.path.join(ORIGIN_PATH,'批改后',new_file_name)
+    shutil.copy2(source_file,destination_file)
     # shutil.move(source_file,destination_file)
 
 
