@@ -3,15 +3,16 @@ from selenium.webdriver.common.by import By
 import time
 import pandas as pd
 import os
+from password import PW
 browser = webdriver.Chrome()
 HOMEWORK_PATH = "D:\\Document\\Study\\研二上_电路助教\\buaa_spoc_automation\\data\\第一次作业"
-
+pw = PW()
 url = "https://sso.buaa.edu.cn/login?service=https%3A%2F%2Fspoc.buaa.edu.cn%2Fspoc%2FmoocMainIndex%2FspocWelcome"
 browser.get(url)
 # 登录spoc
 browser.switch_to.frame("loginIframe")
-browser.find_element(By.ID,"unPassword").send_keys("zy2203203")
-browser.find_element(By.ID,"pwPassword").send_keys("BJydcs001")
+browser.find_element(By.ID,"unPassword").send_keys(pw.ID)
+browser.find_element(By.ID,"pwPassword").send_keys(pw.password)
 browser.find_element(By.CLASS_NAME,"submit-btn").click()
 
 # 切换到新的窗口句柄
