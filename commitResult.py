@@ -4,8 +4,17 @@ import time
 import pandas as pd
 import os
 from password import PW
-browser = webdriver.Chrome()
+import random
+
 HOMEWORK_PATH = "D:\\Document\\Study\\研二上_电路助教\\buaa_spoc_automation\\data\\第一次作业"
+serial = "1"
+A_socres = [100,99,98,97,96]
+B_socres = [90,91,92,93,94,95]
+C_socres = [80,81,82,83,84,85,86,87,88,89]
+
+
+browser = webdriver.Chrome()
+
 pw = PW()
 url = "https://sso.buaa.edu.cn/login?service=https%3A%2F%2Fspoc.buaa.edu.cn%2Fspoc%2FmoocMainIndex%2FspocWelcome"
 browser.get(url)
@@ -69,6 +78,8 @@ for student in student_list:
 
 
         if student_result["评级"]=="A":
+            
+
             if isinstance(student_result['评语'],str):
                 pass
             else:
@@ -79,14 +90,16 @@ for student in student_list:
                 
                 # 分数
                 score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
-                score_input_ele.send_keys('sdffsdfsdff')
+                score_input_ele.send_keys(random.choice(A_socres))
                 
                 # 上传文件                
                 upload_button_ele = browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[2]/form/div/div[4]/div/div/button")
                 upload_button_ele.click()                 
 
                 input_ele = browser.find_element(By.CLASS_NAME,"uploader-btn").find_element(By.TAG_NAME,"input")
-                input_ele.send_keys(r"D:\Document\Study\研二上_电路助教\buaa_spoc_automation\data\第一次作业\作业情况.xlsx")
+                
+                file_path = os.path.join(HOMEWORK_PATH,"批改后",serial+"-"+student_state["学号"]+"-"+student_result["姓名"]+".pdf")
+                input_ele.send_keys(file_path)
                 time.sleep(5)
                 browser.find_element(By.XPATH,"/html/body/div[2]/div[2]/div/div/div[3]/div/button").click()
                 # 上传评语
@@ -98,16 +111,81 @@ for student in student_list:
                 # text_ele.send_keys("sadfafd")
                 # browser.switch_to.default_content()
 
-
-                # 点击确认
-                pass
+                # 点击取消
+                browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[1]").click()
+                
+            
         elif student_result["评级"]=="B":
-            pass
+            if isinstance(student_result['评语'],str):
+                pass
+            else:
+                review_button_ele.click()
+                
+                handles = browser.window_handles
+                browser.switch_to.window(handles[-1])
+                
+                # 分数
+                score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
+                score_input_ele.send_keys(random.choice(A_socres))
+                
+                # 上传文件                
+                upload_button_ele = browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[2]/form/div/div[4]/div/div/button")
+                upload_button_ele.click()                 
+
+                input_ele = browser.find_element(By.CLASS_NAME,"uploader-btn").find_element(By.TAG_NAME,"input")
+                
+                file_path = os.path.join(HOMEWORK_PATH,"批改后",serial+"-"+student_state["学号"]+"-"+student_result["姓名"]+".pdf")
+                input_ele.send_keys(file_path)
+                time.sleep(5)
+                browser.find_element(By.XPATH,"/html/body/div[2]/div[2]/div/div/div[3]/div/button").click()
+                # 上传评语
+                # 切换窗口
+                # iframe = browser.find_element(By.TAG_NAME,"iframe")
+                # browser.switch_to.frame(iframe)
+                # body_ele = browser.find_element(By.ID,"tinymce")
+                # text_ele = body_ele.find_element(By.TAG_NAME,'p')
+                # text_ele.send_keys("sadfafd")
+                # browser.switch_to.default_content()
+
+                # 点击取消
+                browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[1]")            
         elif student_result["评级"]=="C":
-            pass
+            if isinstance(student_result['评语'],str):
+                pass
+            else:
+                review_button_ele.click()
+                
+                handles = browser.window_handles
+                browser.switch_to.window(handles[-1])
+                
+                # 分数
+                score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
+                score_input_ele.send_keys(random.choice(A_socres))
+                
+                # 上传文件                
+                upload_button_ele = browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[2]/form/div/div[4]/div/div/button")
+                upload_button_ele.click()                 
+
+                input_ele = browser.find_element(By.CLASS_NAME,"uploader-btn").find_element(By.TAG_NAME,"input")
+                
+                file_path = os.path.join(HOMEWORK_PATH,"批改后",serial+"-"+student_state["学号"]+"-"+student_result["姓名"]+".pdf")
+                input_ele.send_keys(file_path)
+                time.sleep(5)
+                browser.find_element(By.XPATH,"/html/body/div[2]/div[2]/div/div/div[3]/div/button").click()
+                # 上传评语
+                # 切换窗口
+                # iframe = browser.find_element(By.TAG_NAME,"iframe")
+                # browser.switch_to.frame(iframe)
+                # body_ele = browser.find_element(By.ID,"tinymce")
+                # text_ele = body_ele.find_element(By.TAG_NAME,'p')
+                # text_ele.send_keys("sadfafd")
+                # browser.switch_to.default_content()
+
+                # 点击取消
+                browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[1]")
         elif student_result["评级"]=="D":
             reject_button_ele.click()
-
+        print(student_result["姓名"],"is ok")
     print(student_state)
 
    
