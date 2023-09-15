@@ -58,12 +58,13 @@ homework_state = pd.read_excel(os.path.join(HOMEWORK_PATH,"作业情况.xlsx"),i
 print(homework_state.head)
 print("学生人数",len(student_list))
 dict = ["序号","学号","姓名","状态","作答时间","迟交状态","批阅状态","批阅时间","分数","操作"]
-for student in student_list:
-    
+iter = 20
+# for i in range(len(student_list)):
+while iter<len(student_list):    
     student_state_ele ={}
     student_state = {}
     time.sleep(1)
-    student = student.find_elements(By.TAG_NAME,"td")
+    student = student_list[iter].find_elements(By.TAG_NAME,"td")
     
     for i in range(len(student)):
         student_state_ele[dict[i]] = student[i]
@@ -72,8 +73,9 @@ for student in student_list:
         if key != "操作":
            student_state[key] = student_state_ele[key].find_element(By.TAG_NAME,"span").text
 
-    student_result = homework_state.loc[int(student_state['学号'])]
     if student_state['状态']=='已提交':
+        student_result = homework_state.loc[int(student_state['学号'])]
+
         time.sleep(1)
         review_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[0]
         reject_button_ele = student_state_ele["操作"].find_elements(By.TAG_NAME,"button")[1]
@@ -102,8 +104,9 @@ for student in student_list:
                 
                 file_path = os.path.join(HOMEWORK_PATH,"批改后",serial+"-"+student_state["学号"]+"-"+student_result["姓名"]+".pdf")
                 input_ele.send_keys(file_path)
-                time.sleep(1)
+                time.sleep(5)
                 browser.find_element(By.XPATH,"/html/body/div[2]/div[2]/div/div/div[3]/div/button").click()
+                
                 # 上传评语
                 # 切换窗口
                 # iframe = browser.find_element(By.TAG_NAME,"iframe")
@@ -113,7 +116,8 @@ for student in student_list:
                 # text_ele.send_keys("sadfafd")
                 # browser.switch_to.default_content()
 
-                # 点击确认
+                # 点击确认 /html/body/div[10]/div[2]/div/div/div[3]/div/button[2]
+                time.sleep(1)
                 browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[2]").click()
                 
             
@@ -150,7 +154,8 @@ for student in student_list:
                 # browser.switch_to.default_content()
 
                 # 点击取消
-                browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[1]")            
+                time.sleep(1)
+                browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[2]").click()            
         elif student_result["评级"]=="C":
             if isinstance(student_result['评语'],str):
                 pass
@@ -184,11 +189,13 @@ for student in student_list:
                 # browser.switch_to.default_content()
 
                 # 点击取消
-                browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[1]")
+                time.sleep(1)
+                browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[3]/div/button[2]").click()
         elif student_result["评级"]=="D":
             reject_button_ele.click()
         print(student_result["姓名"],"is ok")
     print(student_state)
+    iter+=1
 
    
     # print(student.text)
