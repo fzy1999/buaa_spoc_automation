@@ -8,9 +8,9 @@ import random
 
 HOMEWORK_PATH = "D:\\Document\\Study\\研二上_电路助教\\buaa_spoc_automation\\data\\第一次作业"
 serial = "1"
-A_socres = [100,99,98,97,96]
-B_socres = [90,91,92,93,94,95]
-C_socres = [80,81,82,83,84,85,86,87,88,89]
+A_SOCRES = [100,99,98,97,96]
+B_SOCRES = [90,91,92,93,94,95]
+C_SOCRES = [80,81,82,83,84,85,86,87,88,89]
 
 
 browser = webdriver.Chrome()
@@ -94,7 +94,7 @@ while iter<len(student_list):
                 
                 # 分数
                 score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
-                score_input_ele.send_keys(random.choice(A_socres))
+                score_input_ele.send_keys(random.choice(A_SOCRES))
                 
                 # 上传文件                
                 upload_button_ele = browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[2]/form/div/div[4]/div/div/button")
@@ -132,7 +132,7 @@ while iter<len(student_list):
                 
                 # 分数
                 score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
-                score_input_ele.send_keys(random.choice(A_socres))
+                score_input_ele.send_keys(random.choice(B_SOCRES))
                 
                 # 上传文件                
                 upload_button_ele = browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[2]/form/div/div[4]/div/div/button")
@@ -167,7 +167,7 @@ while iter<len(student_list):
                 
                 # 分数
                 score_input_ele = browser.find_elements(By.CLASS_NAME,"ivu-input")[1]
-                score_input_ele.send_keys(random.choice(A_socres))
+                score_input_ele.send_keys(random.choice(C_SOCRES))
                 
                 # 上传文件                
                 upload_button_ele = browser.find_element(By.XPATH,"/html/body/div[10]/div[2]/div/div/div[2]/form/div/div[4]/div/div/button")
